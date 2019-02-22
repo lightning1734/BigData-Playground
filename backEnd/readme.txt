@@ -1,1 +1,1 @@
-Using flask and livy as tunnels to the spark cluster
+Using Flask and Spark cluster as the back-end
