@@ -22,6 +22,106 @@ class FlowToolbar extends React.Component {
     });
     const { propsAPI } = this.props;
     console.log(propsAPI.save())
+    
+    var Sourc = propsAPI.save().nodes[0].id;
+    var tag = 'Input';
+    for (let indexN of propsAPI.save().nodes.keys()) {
+      if ('Input' === propsAPI.save().nodes[indexN].label) {
+        Sourc = propsAPI.save().nodes[indexN].id;
+        break;
+      }
+    }
+
+    for (var k = 0; k < propsAPI.save().nodes.length; k++) {
+
+      switch (tag) {
+        case 'Input':
+
+        case 'Output':
+
+        case 'ConvNet':
+
+        case 'DensenNet':
+
+        default:
+          throw new Error();
+      }
+
+      for (let indexE of propsAPI.save().edges.keys()) {
+
+        if (Sourc === propsAPI.save().edges[indexE].source) {
+          Sourc = propsAPI.save().edges[indexE].target;
+          console.log(Sourc);
+          for (let indexN of propsAPI.save().nodes.keys()) {
+            if (Sourc === propsAPI.save().nodes[indexN].id) {
+              tag = propsAPI.save().nodes[indexN].label;
+              console.log(tag);
+              break;
+            }
+          }
+          break;
+        }
+      }
+    }
+  }
+  
+ handleLegal() {
+    const { propsAPI } = this.props;
+    var isLegal = 0;
+    var noneed = 1;
+    const lenE = propsAPI.save().edges.length;
+    const LenE =lenE;
+
+    if (lenE > 0) {
+      var Sourc;
+      let path = new Array(propsAPI.save().nodes.length).fill(0);
+
+      for (let indexN of propsAPI.save().nodes.keys()) {
+        if ('Input' === propsAPI.save().nodes[indexN].label) {
+          Sourc = propsAPI.save().nodes[indexN].id;
+          path[indexN] = 1;
+          noneed = 0;
+          break;
+        }
+      }
+      if(noneed === 0) {
+        for (var k = 0; k < lenE; k++) {
+
+          for (let indexE of propsAPI.save().edges.keys()) {
+            if (Sourc === propsAPI.save().edges[indexE].source) {
+              Sourc = propsAPI.save().edges[indexE].target;
+
+              for (let indexN of propsAPI.save().nodes.keys()) {
+                if (propsAPI.save().nodes[indexN].id === Sourc) {
+                  if (path[indexN] === 0) {
+                    if (k === LenE - 1 && propsAPI.save().nodes[indexN].label === 'Output') {
+                      isLegal = 1;
+                      break;
+                    } else {
+                      path[indexN] = 1;
+                      break;
+                    }
+                  } else {
+                    noneed = 1;
+                    break;
+                  }
+                }
+              }
+              break;
+            }
+          }
+          if (noneed === 1) {
+            break;
+          }
+        }
+      }
+    }
+    if(isLegal === 1) {
+      alert('legal');
+    }else{
+      alert('illegal');
+    }
+
   }
 
   handleOk = (e) => {
@@ -228,7 +328,8 @@ class FlowToolbar extends React.Component {
             <i className={`${iconfont.iconfont} ${iconfont.iconUngroup}`} />
           </Tooltip>
         </Command>
- 
+        
+        <Button className="" onClick={()=>this.handleLegal()}>isLegal</Button>
         <Button className={styles.runButton} size="small" onClick={()=>this.showDetail()}>run</Button>
 
         <Modal title="Basic Modal" visible={this.state.visible}
