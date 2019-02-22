@@ -34,18 +34,18 @@ class FlowToolbar extends React.Component {
 
     for (var k = 0; k < propsAPI.save().nodes.length; k++) {
 
-      switch (tag) {
-        case 'Input':
+      // switch (tag) {
+      //   case 'Input':
 
-        case 'Output':
+      //   case 'Output':
 
-        case 'ConvNet':
+      //   case 'ConvNet':
 
-        case 'DensenNet':
+      //   case 'DensenNet':
 
-        default:
-          throw new Error();
-      }
+      //   default:
+      //     throw new Error();
+      // }
 
       for (let indexE of propsAPI.save().edges.keys()) {
 
