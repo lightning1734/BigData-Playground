@@ -14,25 +14,26 @@ class FlowToolbar extends React.Component {
   state = {
     visible: false,
     running : false,
+
      }
 
 
   livyTest = () =>{
   const init={
     method: 'POST', 
-    body:JSON.stringify({'a':'b'}),
+    body:JSON.stringify(this.showDetail()),
     mode: 'cors',
     headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-  }
-  fetch(
-    'http://localhost:5000/test',init
-  )
-    .then(res => res.json())
-    .then(data => {
-      console.log(data.output.data)
-      this.setState({users: data})
-    })
-    .catch(e => console.log('错误:', e))
+    }
+    fetch(
+      'http://localhost:5000/test',init
+    )
+      .then(res => res.json())
+      .then(data => {
+        console.log(data.output.data)
+        this.setState({users: data})
+      })
+      .catch(e => console.log('错误:', e))
   }
 
   returnLoss = () =>{
@@ -74,20 +75,6 @@ class FlowToolbar extends React.Component {
     }
 
     for (var k = 0; k < inf.nodes.length; k++) {
-
-      // switch (tag) {
-      //   case 'Input':
-
-      //   case 'Output':
-
-      //   case 'ConvNet':
-
-      //   case 'DensenNet':
-
-      //   default:
-      //     throw new Error();
-      // }
-
       for (let indexE of inf.edges.keys()) {
         if (Sourc === inf.edges[indexE].source) {
           Sourc = inf.edges[indexE].target;   
@@ -104,6 +91,7 @@ class FlowToolbar extends React.Component {
       }
     }
     console.log(stream)
+    return stream
   }
   
  handleLegal() {

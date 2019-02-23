@@ -16,6 +16,7 @@ global loss
 
 @app.route('/test', methods=['GET', 'POST'])
 def test():
+    print(request.form)
     # data_mine = {'kind': 'spark'}
     # create_session = requests.post(host + '/sessions', data=json.dumps(data_mine), headers=headers)
     # session_url = host + create_session.headers['location']
