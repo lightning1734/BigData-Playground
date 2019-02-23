@@ -23,7 +23,7 @@ class FlowToolbar extends React.Component {
     method: 'POST', 
     body:JSON.stringify(this.showDetail()),
     mode: 'cors',
-    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+    headers: {'Content-Type': 'application/json'},
     }
     fetch(
       'http://localhost:5000/test',init

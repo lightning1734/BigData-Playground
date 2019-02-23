@@ -16,7 +16,12 @@ global loss
 
 @app.route('/test', methods=['GET', 'POST'])
 def test():
-    print(request.form)
+    inf = request.json
+    for index in range(len(inf)):
+        print(inf[index]["label"])
+        print(inf[index]["attribute"])
+
+    
     # data_mine = {'kind': 'spark'}
     # create_session = requests.post(host + '/sessions', data=json.dumps(data_mine), headers=headers)
     # session_url = host + create_session.headers['location']
