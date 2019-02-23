@@ -5,7 +5,7 @@ import styles from './index.less';
 import iconfont from '../../theme/iconfont.less';
 import {AppendingLineChart} from "../linechart/linechart.ts";
 import d3 from "d3"
-import {run} from "../MnistTest/mnist"
+import {run} from "../Models/MnistTest/mnist"
 import { withPropsAPI } from '@src';
 
 
