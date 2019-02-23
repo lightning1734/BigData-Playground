@@ -34,7 +34,7 @@ def test():
 
     # code above aims for open a new livy session, it is suggested to open it in andvance to avoid wasting time 
 
-    fileobj = open('./test.scala', 'r')     # open scala file where your spark code lies
+    fileobj = open('./DataPreprocessing/MaxMinScalar.scala', 'r')     # open scala file where your spark code lies
 
     try:
         code = fileobj.read()

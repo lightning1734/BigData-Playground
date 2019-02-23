@@ -4,6 +4,7 @@ import org.apache.spark.ml.feature.MinMaxScaler
 import org.apache.spark.ml.linalg.Vectors
 import org.apache.spark.ml.feature.VectorAssembler
 
+/**
 def get(url: String) = scala.io.Source.fromURL(url).mkString
 
 var i = 0
@@ -13,6 +14,7 @@ while(i < 10){
     Thread.sleep(2000)
     i+=1
 }
+**/
 
 
 val ds = spark.read.json("/examples/people.json")
@@ -23,8 +25,9 @@ val scaler = new MinMaxScaler().setInputCol("new_age").setOutputCol("scalar_age"
 val scalerModel = scaler.fit(output)
 val scaledData = scalerModel.transform(output)
 scaledData.show()
-scaledData.write.format("json").save()
 
+
+/**  
 
 val df = spark.createDataFrame(Seq(
             ("andy",0,-1.0),
@@ -45,3 +48,5 @@ val scaler = new MinMaxScaler().setInputCol("age").setOutputCol("scalar_age")
 val scalerModel = scaler.fit(df)
 val scaledData = scalerModel.transform(df)
 scaledData.show()
+
+**/

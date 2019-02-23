@@ -1,3 +1,3 @@
-println("This is a test file")
+println(%d)
         
         
