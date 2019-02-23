@@ -19,7 +19,7 @@
 // It is a useful example of how you could create your own data manager class
 // for arbitrary data though. It's worth a look :)
 import {IMAGE_H, IMAGE_W, MnistData} from './data';
-import {AppendingLineChart} from "../linechart/linechart.ts";
+import {AppendingLineChart} from "../../linechart/linechart.ts";
 import d3 from "d3"
 
 import {showTestResults} from './ui';

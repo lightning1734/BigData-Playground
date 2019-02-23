@@ -3,7 +3,6 @@ import { Card, Form, Input, Modal, Button } from 'antd';
 import { withPropsAPI } from '@src';
 import {AppendingLineChart} from "../linechart/linechart.ts";
 import d3 from "d3"
-import {run} from "../MnistTest/mnist"
 
 const { Item } = Form;
 
