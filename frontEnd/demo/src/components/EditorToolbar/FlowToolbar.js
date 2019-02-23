@@ -16,6 +16,40 @@ class FlowToolbar extends React.Component {
     running : false,
      }
 
+
+  livyTest = () =>{
+  const init={
+    method: 'POST', 
+    body:JSON.stringify({'a':'b'}),
+    mode: 'cors',
+    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+  }
+  fetch(
+    'http://localhost:5000/test',init
+  )
+    .then(res => res.json())
+    .then(data => {
+      console.log(data.output.data)
+      this.setState({users: data})
+    })
+    .catch(e => console.log('错误:', e))
+  }
+
+  returnLoss = () =>{
+    const init={
+      method: 'GET', 
+    }
+    fetch(
+      'http://localhost:5000/returnLoss',init
+    )
+      .then(res => res.json())
+      .then(data => {
+        console.log(data)
+        this.setState({users: data})
+      })
+      .catch(e => console.log('错误:', e))
+  }
+  
   showDetail(){
     this.setState({
       visible: true,
@@ -148,109 +182,8 @@ class FlowToolbar extends React.Component {
 
   showLine = () =>{
 
-    // var SVM = ML.SVM
-
-    // var options = {
-    //   C: 0.01,
-    //   tol: 10e-4,
-    //   maxPasses: 10,
-    //   maxIterations: 10000,
-    //   kernel: 'rbf',
-    //   kernelOptions: {
-    //     sigma: 0.5
-    //   }
-    // };
-
-    // var svm = new SVM(options);
-
-    // // Train the classifier - we give him an xor
-    // var features = [[0,0],[0,1],[1,1],[1,0]];
-    // var labels = [1, -1, 1, -1];
-    // svm.train(features, labels);
-
-    // // Let's see how narrow the margin is
-    // var margins = svm.margin(features);
-
-    // console.log(margins)
-
-    // // Let's see if it is separable by testing on the training data
-    // svm.predict(features); // [1, -1, 1, -1]
-
-    // // I want to see what my support vectors are
-    // var supportVectors = svm.supportVectors();
-    
-    // // Now we want to save the model for later use
-    // var model = svm.toJSON();
-
-    // /// ... later, you can make predictions without retraining the model
-    // var importedSvm = SVM.load(model);
-    // var res = importedSvm.predict(features); // [1, -1, 1, -1] 
-
-    // console.log(res)
     run(100);
-    // var lineChart = new AppendingLineChart(d3.select("#linechart"),
-    //     ["#777", "black"]);
-
-    // let i = 0;
-
-
-    // let a1 = [];
-    // let b1 = [];
-    // for(let i = 0; i < 10; i++ ){
-    //   let temp = Math.random()*10
-    //   a1.push(temp);
-    //   b1.push(2*temp+4.5+Math.random())
-    // }
-
-    // const train_x = tf.tensor1d(a1);
-    // const train_y = tf.tensor1d(b1);
-    // const f = x => w.mul(x).add(b);
-    // const w = tf.variable(tf.scalar(Math.random()));
-    // const b = tf.variable(tf.scalar(Math.random()));
-    // const numIterations = 200;
-    // const learningRate = 0.1;
-    // const optimizer = tf.train.adam(learningRate);
-    // const loss = (pred, label) => pred.sub(label).square().mean();
-
-    // var loss_value = 0;
-
-    // loss(f(train_x), train_y).data().then(function (value){
-    //         loss_value=value[0]
-    //      })
-
-    // this.setState({
-    //       running: true
-    //     })
-
-    //   var t = d3.timer(()=>{
-    //     if (!this.state.running){
-    //       return true;
-    //     }
-    //     {
-    //       let loss_var = 0 ;
-    //       optimizer.minimize(() => {      
-    //         loss_var = loss(f(train_x), train_y);
-    //         loss_var.data().then(function (value){
-    //            loss_value=value[0]
-    //         })
-    //         return loss_var;
-    //       })
-
-    //       lineChart.addDataPoint([loss_value,loss_value]);
-    //       i++;
-
-
-    //       d3.select("#loss-train").text(loss_value);
-    //       d3.select("#loss-test").text(loss_value);
-    //       d3.select("#iter-number").text(i);
-
-
     
-    //     }
-        
-    //     return false
-    //     // return false
-    //   }, 10); 
   }
 
 
@@ -337,8 +270,10 @@ class FlowToolbar extends React.Component {
           </Tooltip>
         </Command>
         
-        <Button className="" onClick={()=>this.handleLegal()}>isLegal</Button>
-        <Button className={styles.runButton} size="small" onClick={()=>this.showDetail()}>run</Button>
+        <Button  onClick={()=>this.handleLegal()}>isLegal</Button>
+        <Button  onClick={()=>this.showDetail()}>run</Button>
+        <Button onClick={()=>this.livyTest()}>spark-test</Button>
+        <Button onClick={()=>this.returnLoss()}>return-loss</Button>
 
         <Modal title="Basic Modal" visible={this.state.visible}
           onOk={this.handleOk} onCancel={this.handleCancel}
@@ -349,10 +284,7 @@ class FlowToolbar extends React.Component {
           <p>train-loss:
             <div id="loss-train"></div>
           </p>
-          {/* <p>test-loss:
-            <div id="loss-test"></div>
-          </p> */}
-
+          
           <div id="linechart"></div>
           
           <div id="images">  </div>
