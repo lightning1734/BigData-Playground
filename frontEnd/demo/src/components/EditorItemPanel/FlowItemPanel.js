@@ -73,8 +73,9 @@ class FlowItemPanel extends React.Component {
             model={{
               // color: '#FA8C16',
               label: 'Input',
+              attr:{'sourceFile':0}
             }}
-            src="https://gw.alipayobjects.com/zos/rmsportal/ZnPxbVjKYADMYxkTQXRi.svg"
+            
           /></ItemPanel></Menu.Item>
           <Menu.Item key="2"><ItemPanel><Item
             type="node"
@@ -83,9 +84,10 @@ class FlowItemPanel extends React.Component {
             model={{
               // color: '#FA8C16',
               label: 'Output',
+              attr:{'targetFile':0}
             }}
             
-            src="https://gw.alipayobjects.com/zos/rmsportal/wHcJakkCXDrUUlNkNzSy.svg"
+            
           /></ItemPanel></Menu.Item>
         
         </MenuItemGroup>
@@ -98,8 +100,9 @@ class FlowItemPanel extends React.Component {
             model={{
               // color: '#13C2C2',
               label: 'ConvNet',
+              attr:{'learningRate':0.1}
             }}
-            src="https://gw.alipayobjects.com/zos/rmsportal/SnWIktArriZRWdGCnGfK.svg"
+            
           /></ItemPanel></Menu.Item>
           <Menu.Item key="4"><ItemPanel><Item
             type="node"
@@ -108,8 +111,20 @@ class FlowItemPanel extends React.Component {
             model={{
               // color: '#722ED1',
               label: 'DenseNet',
+              attr:{'learningRate':0.1}
             }}
-            src="https://gw.alipayobjects.com/zos/rmsportal/rQMUhHHSqwYsPwjXxcfP.svg"
+            
+          /></ItemPanel></Menu.Item>
+          <Menu.Item key="5"><ItemPanel><Item
+            type="node"
+            size="200*40"
+            shape="flow-rect"
+            model={{
+              // color: '#722ED1',
+              label: 'FillNa',
+              attr:{'range':'unknown','originNumber':0,'fillingNumber':0}
+            }}
+           
           /></ItemPanel></Menu.Item>
           
         </MenuItemGroup>

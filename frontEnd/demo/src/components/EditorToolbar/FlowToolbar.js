@@ -23,16 +23,23 @@ class FlowToolbar extends React.Component {
     const { propsAPI } = this.props;
     console.log(propsAPI.save())
     
-    var Sourc = propsAPI.save().nodes[0].id;
+    const inf = propsAPI.save();
+
+    var Sourc = 0;
     var tag = 'Input';
-    for (let indexN of propsAPI.save().nodes.keys()) {
-      if ('Input' === propsAPI.save().nodes[indexN].label) {
-        Sourc = propsAPI.save().nodes[indexN].id;
+    var stream = new Array();
+    var attribute = new Array();
+
+    for (let indexN of inf.nodes.keys()) {
+      if ('Input' === inf.nodes[indexN].label) {
+        Sourc = inf.nodes[indexN].id;
+        attribute = inf.nodes[indexN].attr
+        stream.push({"label":tag,"attribute":attribute})
         break;
       }
     }
 
-    for (var k = 0; k < propsAPI.save().nodes.length; k++) {
+    for (var k = 0; k < inf.nodes.length; k++) {
 
       // switch (tag) {
       //   case 'Input':
@@ -47,15 +54,14 @@ class FlowToolbar extends React.Component {
       //     throw new Error();
       // }
 
-      for (let indexE of propsAPI.save().edges.keys()) {
-
-        if (Sourc === propsAPI.save().edges[indexE].source) {
-          Sourc = propsAPI.save().edges[indexE].target;
-          console.log(Sourc);
-          for (let indexN of propsAPI.save().nodes.keys()) {
-            if (Sourc === propsAPI.save().nodes[indexN].id) {
-              tag = propsAPI.save().nodes[indexN].label;
-              console.log(tag);
+      for (let indexE of inf.edges.keys()) {
+        if (Sourc === inf.edges[indexE].source) {
+          Sourc = inf.edges[indexE].target;   
+          for (let indexN of inf.nodes.keys()) {
+            if (Sourc === inf.nodes[indexN].id) {
+              tag = inf.nodes[indexN].label;
+              attribute = inf.nodes[indexN].attr
+              stream.push({"label":tag,"attribute":attribute})
               break;
             }
           }
@@ -63,22 +69,24 @@ class FlowToolbar extends React.Component {
         }
       }
     }
+    console.log(stream)
   }
   
  handleLegal() {
     const { propsAPI } = this.props;
     var isLegal = 0;
     var noneed = 1;
-    const lenE = propsAPI.save().edges.length;
+    const inf = propsAPI.save();
+    const lenE = inf.edges.length;
     const LenE =lenE;
 
     if (lenE > 0) {
       var Sourc;
-      let path = new Array(propsAPI.save().nodes.length).fill(0);
+      let path = new Array(inf.nodes.length).fill(0);
 
-      for (let indexN of propsAPI.save().nodes.keys()) {
-        if ('Input' === propsAPI.save().nodes[indexN].label) {
-          Sourc = propsAPI.save().nodes[indexN].id;
+      for (let indexN of inf.nodes.keys()) {
+        if ('Input' === inf.nodes[indexN].label) {
+          Sourc = inf.nodes[indexN].id;
           path[indexN] = 1;
           noneed = 0;
           break;
@@ -87,14 +95,14 @@ class FlowToolbar extends React.Component {
       if(noneed === 0) {
         for (var k = 0; k < lenE; k++) {
 
-          for (let indexE of propsAPI.save().edges.keys()) {
-            if (Sourc === propsAPI.save().edges[indexE].source) {
-              Sourc = propsAPI.save().edges[indexE].target;
+          for (let indexE of inf.edges.keys()) {
+            if (Sourc === inf.edges[indexE].source) {
+              Sourc = inf.edges[indexE].target;
 
-              for (let indexN of propsAPI.save().nodes.keys()) {
-                if (propsAPI.save().nodes[indexN].id === Sourc) {
+              for (let indexN of inf.nodes.keys()) {
+                if (inf.nodes[indexN].id === Sourc) {
                   if (path[indexN] === 0) {
-                    if (k === LenE - 1 && propsAPI.save().nodes[indexN].label === 'Output') {
+                    if (k === LenE - 1 && inf.nodes[indexN].label === 'Output') {
                       isLegal = 1;
                       break;
                     } else {
